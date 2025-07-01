@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Submit Feedback to Firebase</title>
+  
+</head>
+<body>
+
+  <div class="container">
+    <h2>Feedback submission Form</h2>
+    <input type="text" id="username" placeholder="Your Name" required>
+    <input type="text" id="clientcompany" placeholder="client company" required>
+     <input type="text" id="department" placeholder="department" required>
+      <input type="text" id="satisfactionscore" placeholder="satisfaction score" required>
+         <input type="score" id="score" placeholder="score" required>
+         <input type="text" id="comment" placeholder="comment" required>
+      <button id="submitBtn">Submit Feedback</button>
+      <button onclick="displayfeedback()">feedbacktable</button>
+      <select name="filter" id="filter">
+        <option value="asc">ascending</option>;
+        <option value="desc">descending</option>
+      </select>
+
+    <div id="responseMsg" class="message"></div>
+    <table id="dashboard">
+       
+    </table>
+  </div>
+  <script>
+    let url=`url`;
+    let button=document.getElementById("submitBtn");
+    button.addEventListener(onclick,()=>{
+        let feedback={
+        agenName:document.getElementById("username").value,
+        client_company:document.getElementById("clientcompany").value,
+        department:document.getElementById("department").value,
+        satisfactionscore:document.getElementById("satisfacatiscore").value,
+        score:document.getElementById("score").value,
+        Comment:document.getElementById("comment").value
+        }
+      let data= await fetch("url",{
+        method:"POST",
+        body:JSON.stringify({
+            users:feedback
+        })
+        headers:{
+            "Content-type":"application/json"
+        }
+      })
+       document.getElementById("username").value=""
+       document.getElementById("clientcompany").value=""
+        document.getElementById("department").value=""
+        document.getElementById("satisfacatiscore").value=""
+        document.getElementById("score").value=""
+         document.getElementById("comment").value=""
+    })
+ async function sorting() {
+    let value=document.getElementById("filter").value;
+    let data=await fetch("url");
+    if(!data){
+        alert("no data entered")
+    return
+    }
+     let sort=data.filter((ele)=>{
+        if(value=='asc'){
+         return   ele.satisfacatiscore.a=ele.satisfacatiscore.b;
+        }else{
+           return ele.satisfacatiscore.b-ele.satisfacatiscore.b;
+        }
+     }    
+    )
+    
+    
+ }
+
+    async function displayfeedback() {
+        let response=await fetch(sorting());
+        let data=await response.json();
+        let dashboard=document.getElementById("dashboard")
+        div.innerHTML=""
+        let data=data.forEach((ele)=> {
+        let newrow=document.createElement("tr");
+          newrow=` <tr>
+            <td>${ele.agentName}</td>
+            <td>${ele.client_company}</td>
+            <td>${ele.department}</td>
+            <td>${ele.satisfacatiscore}</td>
+            <td>${ele.score}</td>
+            <td>${ele.comment}</td>
+        </tr>`
+        dashboard.appendChild(newrow)
+            
+        });
+    }
+  </script>
+

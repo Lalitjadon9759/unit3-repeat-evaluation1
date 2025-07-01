@@ -1,0 +1,11 @@
+feedbacks: {
+  ""-Nx789fKJGHda"": {
+    agent: ""Kiran"",
+    company: ""FinEdge"",
+    department: ""SaaS"",
+    score: 5,
+    nps: 80,
+    comment: ""Loved the demo"",
+    timestamp: 1728381212
+  }
+}
